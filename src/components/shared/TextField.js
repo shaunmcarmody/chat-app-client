@@ -21,7 +21,6 @@ export default class TextField extends Component {
   handleChange = (e) => {
     const { value } = e.target
     this.setState({ value });
-    this.userActive(value)
   }
 
   handleSubmit = (e) => {
