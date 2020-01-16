@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Message from './Message';
 
 const Div = styled.div`
+  overflow-y: scroll;
   height: calc(100vh - 80px);
   padding: 20px;
 `;
