@@ -1,23 +1,37 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import uuid from 'uuid/v4';
+import styled from 'styled-components';
 import { Portal, Splash } from './components/views';
+
+const Div = styled.div`
+  margin: auto;
+  max-width: 600px;
+  width: 100%;
+`;
 
 class App extends Component {
   state = {
     user: null,
+    userId: null,
     messages: [],
-    error: ''
+    error: '',
+  }
+
+  componentDidMount() {
+    this.subscribe();
   }
 
   initUser = (user) => {
-    this.setState({ user });
+    const userId = uuid();
+    this.setState({ user, userId });
     this.subscribe();
   }
 
   postMessage = async (message) => {
     try {
-      const { user } = this.state;
-      await axios.post('http://localhost:5000/message/new', { user, message });
+      const { user, userId } = this.state;
+      await axios.post('http://localhost:5000/message/new', { user, userId, message });
     } catch ({ message }) {
       this.setState({ error: message });
     }
@@ -38,19 +52,20 @@ class App extends Component {
   
   render() {
     return (
-      <div className="App">
+      <Div>
         {
           this.state.user ?
             <Portal
               messages={this.state.messages}
               submit={this.postMessage}
+              userId={this.state.userId}
             />
             :
             <Splash
               submit={this.initUser}
             />
         }
-      </div>
+      </Div>
     );
   }
   
