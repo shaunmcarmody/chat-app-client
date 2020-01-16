@@ -41,6 +41,7 @@ class App extends Component {
           this.state.user ?
             <Portal
               messages={this.state.messages}
+              submit={this.postMessage}
             />
             :
             <Splash
