@@ -5,13 +5,11 @@ const Div = styled.div`
   border: 3px solid blue;
 `;
 
-export default ({ message }) => {
-  const { name } = message.user
-  const { text } = message
+export default ({ message, user }) => {
   return (
     <Div>
-      <h2>{name}</h2>
-      <p>{text}</p>
+      <h2>{user}</h2>
+      <p>{message}</p>
     </Div>
   )
 }
