@@ -9,7 +9,13 @@ const Div = styled.div`
 export default ({ messages }) => (
   <Div>
     {
-      messages.map((message) => <Message message={message} key={message.id} />)
-    }
+      messages.length > 1 && messages.map((msg) => (
+        <Message
+          message={msg.message}
+          user={msg.user}
+          key={msg.id}
+        />
+      ))
+  }
   </Div>
 );
