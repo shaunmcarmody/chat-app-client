@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import Message from './Message';
 
 const Div = styled.div`
-  border: 3px solid red;
+  height: calc(100vh - 80px);
+  padding: 20px;
 `;
 
-export default ({ messages }) => (
+export default ({ messages, userId }) => (
   <Div>
     {
       messages.length > 0 && messages.map((msg) => (
@@ -14,6 +15,7 @@ export default ({ messages }) => (
           message={msg.message}
           user={msg.user}
           key={msg.id}
+          sent={msg.userId === userId ? true : false}
         />
       ))
   }
