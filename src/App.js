@@ -16,8 +16,8 @@ class App extends Component {
 
   postMessage = async (message) => {
     try {
-      const { user } = this.state
-      await axios.post('/message/new', { user, message })
+      const { user } = this.state;
+      await axios.post('http://localhost:5000/message/new', { user, message });
     } catch ({ message }) {
       this.setState({ error: message });
     }
@@ -26,8 +26,10 @@ class App extends Component {
   subscribe = async () => {
     try {
       const totalMsgs = this.state.messages.length;
-      const { messages } = await axios.post('/subscribe', { totalMsgs });
-      this.setState({ messages });
+      const { data } = await axios.post('http://localhost:5000/subscribe', { totalMsgs });
+      this.setState(({ messages }) => ({
+        messages: [...messages, ...data.messages]
+      }));
     } catch ({ message }) {
       this.setState({ error: message });
     }
