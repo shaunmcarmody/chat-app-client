@@ -18,10 +18,6 @@ class App extends Component {
     error: '',
   }
 
-  componentDidMount() {
-    this.subscribe();
-  }
-
   initUser = (user) => {
     const userId = uuid();
     this.setState({ user, userId });
